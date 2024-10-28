@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Tasks</h2>
+<a href="{{ url_for('add_task') }}" class="btn btn-success">Add Task</a>
+<ul class="list-group">
+    {% for task in tasks %}
+    <li class="list-group-item">
+        <strong>{{ task.title }}</strong>
+        <p>{{ task.description }}</p>
+        <small>Due: {{ task.date_due.strftime('%Y-%m-%d') }}</small>
+        <form method="POST" action="{{ url_for('delete_task', task_id=task.id) }}">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
